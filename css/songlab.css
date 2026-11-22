@@ -1,0 +1,65 @@
+/* Song Lab — violet area of Kaizen Line. Uses tokens from app.css. */
+.sl-hero { background: var(--violet); color: #fff8f0; border-radius: 24px; padding: 22px 20px; position: relative; overflow: hidden;
+  background-image: radial-gradient(circle at 88% 22%, rgba(255,255,255,.16) 0 44px, transparent 45px), radial-gradient(circle at 88% 22%, rgba(255,255,255,.09) 0 84px, transparent 85px), radial-gradient(circle at 88% 22%, rgba(255,255,255,.05) 0 124px, transparent 125px); }
+.sl-hero h1 { font-size: clamp(30px, 8vw, 44px); }
+.sl-hero p { max-width: 34em; }
+.sl-upload { margin-top: 8px; cursor: pointer; }
+.sl-note { opacity: .85; margin-bottom: 0; }
+.sl-list { display: grid; gap: 10px; }
+.sl-song { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--violet); border-radius: 16px; padding: 12px 14px; }
+.sl-open { text-decoration: none; display: flex; flex-direction: column; gap: 4px; min-height: 44px; justify-content: center; }
+.sl-open b { font-size: 18px; overflow-wrap: anywhere; }
+.sl-info { font-size: 14px; color: var(--mute); }
+.sl-pbar { display: block; height: 8px; margin-top: 4px; }
+.sl-acts { display: flex; gap: 6px; }
+.sl-empty p { margin: 0; }
+.sl-demos { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.sl-demo { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; gap: 2px 10px; align-items: center; background: var(--card2); border-radius: 14px; padding: 12px 14px; }
+.sl-demo .btn { grid-row: 1 / span 2; grid-column: 2; }
+.sl-back { display: inline-block; font-weight: 800; text-decoration: none; padding: 8px 0; min-height: 44px; }
+.sl-head h1 { font-size: clamp(26px, 6vw, 38px); overflow-wrap: anywhere; }
+.sl-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 12px; }
+.sl-wave { color: var(--ink); position: relative; height: 110px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); overflow: hidden; cursor: pointer; touch-action: none; }
+.sl-wave canvas { display: block; }
+.sl-transport { display: flex; align-items: center; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
+.sl-transport #slplay { min-width: 120px; background: var(--violet); }
+.sl-time { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--mute); }
+.sl-practice h2, .sl-play h2, .sl-fix h2 { margin-top: 0; }
+.sl-practice .btn.primary { background: var(--violet); }
+.sl-practice .btn.sl-sing { background: var(--amber); }
+.sl-practice select { flex: 1; max-width: 60%; }
+.sl-opt { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 12px 0 0; flex-wrap: wrap; font-weight: 700; }
+.seg { display: inline-flex; background: var(--card2); border-radius: 12px; padding: 4px; gap: 4px; }
+.seg button { border: 0; background: none; font: 700 15px var(--text); min-height: 40px; padding: 4px 14px; border-radius: 9px; cursor: pointer; }
+.seg button.on { background: var(--violet); color: #fff; }
+.sl-capos { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+.sl-capo { text-align: left; background: var(--card2); border: 2px solid transparent; border-radius: 14px; padding: 10px 12px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; font: inherit; color: inherit; }
+.sl-capo b { font-size: 16px; } .sl-capo span { font-weight: 700; font-size: 15px; } .sl-capo small { color: var(--mute); font-size: 13px; }
+.sl-capo.on { border-color: var(--violet); background: color-mix(in srgb, var(--violet) 12%, var(--card)); }
+.sl-chart { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 600px) { .sl-chart { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sl-bar { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 2px 4px; min-height: 64px; }
+.sl-tag { position: absolute; left: 6px; top: -9px; background: var(--violet); color: #fff; font-size: 11px; font-weight: 800; padding: 1px 8px; border-radius: 99px; }
+.sl-beat { border: 0; background: none; font: inherit; color: inherit; min-height: 44px; padding: 2px 0; border-radius: 8px; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding-left: 4px; overflow: hidden; }
+.sl-beat b { font-size: 16px; white-space: nowrap; }
+.sl-beat small { font-size: 11px; color: var(--mute); white-space: nowrap; }
+.sl-beat i { font-style: normal; color: var(--mute); padding-left: 2px; }
+.sl-beat:not(.chg) b { opacity: .6; font-weight: 700; }
+.sl-beat.edited b { text-decoration: underline 2px var(--violet); text-underline-offset: 3px; }
+.sl-beat.now { background: color-mix(in srgb, var(--violet) 22%, transparent); }
+.sl-beat.empty { cursor: default; }
+.sl-beat:focus-visible { outline: 3px solid var(--warn); }
+.sl-fix summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sl-fix .row { margin-top: 8px; }
+.sl-tapbtn { width: 100%; min-height: 120px; border: 0; border-radius: 22px; background: var(--violet); color: #fff; font: 400 32px var(--display); margin: 8px 0; touch-action: manipulation; user-select: none; -webkit-user-select: none; cursor: pointer; }
+.sl-tapbtn:active { transform: scale(.98); }
+.sl-picker .sl-roots { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.sl-picker .sl-types { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 10px; }
+.sl-picker button[data-root], .sl-picker button[data-type] { min-height: 44px; border-radius: 10px; border: 2px solid var(--line); background: var(--card); font: 700 15px var(--text); color: inherit; cursor: pointer; }
+.sl-picker button.on { background: var(--violet); border-color: var(--violet); color: #fff; }
+.sl-pick-now { display: flex; align-items: center; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
+.sl-pick-now #pkname { font-family: var(--display); font-size: 30px; min-width: 3em; }
+.sl-scope { border: 0; padding: 0; margin: 0 0 12px; display: grid; gap: 4px; }
+.sl-scope label { display: flex; gap: 8px; align-items: center; min-height: 36px; }
+.sl-scope input { accent-color: var(--violet); width: 20px; height: 20px; }
+.sl-input { width: 100%; }

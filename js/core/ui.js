@@ -137,4 +137,13 @@ export function fitCanvas(parent) {
 }
 
 /** Read a CSS variable from :root (for canvas colors). */
-export const cssVar = (name, elm = document.documentElement) => getComputedStyle(elm).getPropertyValue(name).trim();
+/** Resolved CSS colour of a variable (handles light-dark()), safe for canvas fillStyle. */
+let probe = null;
+export function cssVar(name, elm = document.documentElement) {
+  const raw = getComputedStyle(elm).getPropertyValue(name).trim();
+  if (!raw || !/light-dark|var\(|color-mix/.test(raw)) return raw;
+  if (!probe) { probe = document.createElement('i'); probe.style.display = 'none'; document.body.appendChild(probe); }
+  probe.style.color = raw;
+  (elm === document.documentElement ? document.body : elm).appendChild(probe);
+  return getComputedStyle(probe).color || raw;
+}

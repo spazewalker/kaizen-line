@@ -63,6 +63,8 @@ button { font: inherit; color: inherit; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 20px 18px; margin: 12px 0; }
 .card.center { text-align: center; } .card.center .btn.big { margin-top: 10px; }
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.topbar .btn { white-space: nowrap; flex: 0 0 auto; }
+[hidden] { display: none !important; }
 .crumb { font-weight: 800; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .apphead { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin: 6px 0 14px; }
 .apphead p { margin: 4px 0 0; }
@@ -77,6 +79,8 @@ button { font: inherit; color: inherit; }
 .tcard { background: var(--card); border: 1px solid var(--line); border-top: 6px solid var(--trk); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
 .tcard-head { display: flex; justify-content: space-between; align-items: baseline; text-decoration: none; gap: 8px; }
 .tname { font-family: var(--display); font-size: 22px; }
+.tcard-head { flex-wrap: wrap; } .tcard-head .muted { white-space: nowrap; font-size: 14px; }
+.tcard-actions .btn { font-size: 16px; text-align: center; }
 .tcard-actions { display: flex; flex-direction: column; gap: 8px; } .tcard-actions .btn { width: 100%; }
 .songlab-card { display: block; margin-top: 16px; text-decoration: none; background: var(--violet); color: #fff; border-radius: var(--r); padding: 18px; background-image: radial-gradient(circle at 92% 30%, rgba(255, 255, 255, .18) 0 40px, transparent 41px), radial-gradient(circle at 92% 30%, rgba(255, 255, 255, .1) 0 70px, transparent 71px); }
 .songlab-card b { font-family: var(--display); font-weight: 400; font-size: 24px; display: block; } .songlab-card span { opacity: .9; }

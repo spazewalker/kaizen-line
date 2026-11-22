@@ -243,7 +243,9 @@ function settingsPage() {
   <section class="card"><h2>Microphone</h2><p class="muted">Guitar and singing games listen to you. Test it here: play or sing a note.</p>
     <div id="micbox"><button class="btn primary" id="mt">Test microphone</button></div></section>
   <section class="card"><h2>Timing calibration</h2><p class="muted">Bluetooth headphones and some speakers add delay. Calibrate once per setup so rhythm games judge you fairly. Use the speaker you practise with, and stay quiet.</p>
-    <p>Current offset: <b id="lat">${S.latencyMs} ms</b></p><div class="row"><button class="btn primary" id="cal">Auto-calibrate (speaker + mic)</button><button class="btn ghost" id="cal0">Reset to 0</button></div><p id="calmsg" class="muted"></p></section>
+    <p>Current offset: <b id="lat">${S.latencyMs} ms</b></p><div class="row"><button class="btn primary" id="cal">Auto-calibrate (speaker + mic)</button><button class="btn ghost" id="cal0">Reset to 0</button></div><p id="calmsg" class="muted"></p>
+    <h3>Tap timing</h3><p class="muted">For tap games. Tap the big pad exactly on each click you hear.</p>
+    <p>Current tap offset: <b id="tlat">${S.tapLatencyMs} ms</b></p><button class="btn ghost" id="tcal">Calibrate taps</button><div id="tbox"></div></section>
   <section class="card"><h2>Preferences</h2>
     <label class="tog"><input type="checkbox" id="lh" ${S.leftHanded ? 'checked' : ''}> Left-handed guitar views</label>
     <label class="tog"><input type="checkbox" id="rom" ${S.showRomaji ? 'checked' : ''}> Show romaji under Japanese</label>
@@ -258,6 +260,7 @@ function settingsPage() {
   $('#sj').onclick = async () => { await unlock(); const r = await fetch('audio/ja/index.json').then(r => r.ok ? r.json() : null).catch(() => null); const f = r && (r['こんにちは'] || Object.values(r)[0]); f ? playClip('audio/ja/' + f) : toast('Japanese audio is not installed yet.'); };
   $('#mt').onclick = () => micTest($('#micbox'));
   $('#cal').onclick = () => calibrate();
+  $('#tcal').onclick = () => tapCalibrate();
   $('#cal0').onclick = () => { settings.set({ latencyMs: 0 }); $('#lat').textContent = '0 ms'; };
   $('#lh').onchange = e => settings.set({ leftHanded: e.target.checked });
   $('#rom').onchange = e => settings.set({ showRomaji: e.target.checked });
@@ -304,6 +307,23 @@ async function calibrate() {
   settings.set({ latencyMs: ms });
   $('#lat').textContent = ms + ' ms';
   msg.textContent = `Heard ${d.length} of ${N} clicks. Offset set to ${ms} ms.`;
+}
+
+async function tapCalibrate() {
+  await unlock();
+  const box = $('#tbox'), c = getCtx(), gap = 0.6, N = 10, t0 = c.currentTime + 1.2, taps = [];
+  box.innerHTML = '<button class="btn primary big" id="tpad" style="min-height:120px;margin-top:10px">Tap on each click</button><p class="muted" id="tmsg">Starting…</p>';
+  for (let i = 0; i < N; i++) click(t0 + i * gap, i === 0);
+  $('#tpad').addEventListener('pointerdown', e => { e.preventDefault(); taps.push(c.currentTime); });
+  await sleep((N * gap + 1.6) * 1000);
+  const d = [];
+  for (let i = 2; i < N; i++) { const ct = t0 + i * gap, h = taps.find(x => Math.abs(x - ct) < gap / 2); if (h != null) d.push(h - ct); }
+  if (d.length < 5) { box.innerHTML = `<p class="muted">Only ${d.length} taps matched. Try again and tap on every click.</p>`; return; }
+  d.sort((a, b) => a - b);
+  const ms = Math.round(d[d.length >> 1] * 1000);
+  settings.set({ tapLatencyMs: ms });
+  $('#tlat').textContent = ms + ' ms';
+  box.innerHTML = `<p class="muted">Done. Your taps land ${Math.abs(ms)} ms ${ms >= 0 ? 'after' : 'before'} the click on average. Games will allow for it.</p>`;
 }
 
 function notFound() { frame(`${topbar()}<div class="card center"><h2>Not found</h2><a class="btn primary" href="#/">Home</a></div>`); }

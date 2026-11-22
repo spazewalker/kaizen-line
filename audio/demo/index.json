@@ -1,0 +1,26 @@
+[
+ {
+  "id": "paper-lanterns",
+  "title": "Paper Lanterns (demo)",
+  "file": "audio/demo/paper-lanterns.mp3",
+  "bpm": 96,
+  "key": "G major",
+  "duration": 93.0
+ },
+ {
+  "id": "night-express",
+  "title": "Night Express (demo)",
+  "file": "audio/demo/night-express.mp3",
+  "bpm": 120,
+  "key": "A minor",
+  "duration": 75.0
+ },
+ {
+  "id": "morning-ferry",
+  "title": "Morning Ferry (demo)",
+  "file": "audio/demo/morning-ferry.mp3",
+  "bpm": 84,
+  "key": "D major",
+  "duration": 83.0
+ }
+]
